@@ -10,23 +10,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Install Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: 23
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22
 
-    - name: Install Dependencies (Clean Install)
-      run: npm ci
+      - name: Install Dependencies (Clean Install)
+        run: npm ci
 
-    - name: Lint with ESLint
-      run: npx eslint src
+      - name: Lint with ESLint
+        run: npx eslint src
 
-    - name: Build and Deploy to Vercel
-      env:
-        VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-        VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_DEV }}
-      run: |
-        npx vercel --prod --token=$VERCEL_TOKEN
+      - name: Build and Deploy to Vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_DEV }}
+        run: |
+          npx vercel --prod --token=$VERCEL_TOKEN
